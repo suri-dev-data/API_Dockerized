@@ -1,0 +1,4 @@
+dockerfiles/api.dockerfile
+env/database.env
+docker-compose.yml
+.gitignore

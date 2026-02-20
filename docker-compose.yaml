@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  code:
+      build: ./dockerfiles
+      stdin_open: true
+      tty: true
+      volumes:
+        - ./:/app
+      
+  api:
+    build:
+      context: .
+      dockerfile: dockerfiles/api.dockerfile
+    env_file:
+      - env/database.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+
+  database:
+    image: mongo:latest
+    env_file:
+      - env/database.env
+    ports:
+      - "27017:27017"
